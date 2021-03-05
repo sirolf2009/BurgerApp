@@ -41,6 +41,25 @@ public class HealthyBurgerTest {
 		
 		assertThrows(TooManyToppings.class, () -> new HealthyBurger(BLACK_ANGUS_PATTY, WHOLEGRAIN, tooManyToppings));
 	}
+
+	@Test
+	public void testHealthyBurgerReceipt() throws TooManyToppings {
+		Set<Toppings> toppings = set(Toppings.CHEESE, Toppings.KETCHUP, Toppings.ONION, Toppings.TOMATO);
+		HealthyBurger stackedBurger = new HealthyBurger(BLACK_ANGUS_PATTY, WHOLEGRAIN, toppings);
+		StringBuilder expectedReceipt = new StringBuilder();
+		expectedReceipt.append("=== Burger ===\n");
+		expectedReceipt.append("HealthyBurger	€ 3,00\n");
+		expectedReceipt.append("+ cheese	€ 1,00\n");
+		expectedReceipt.append("+ ketchup	€ 0,10\n");
+		expectedReceipt.append("+ onion	€ 0,50\n");
+		expectedReceipt.append("+ tomato	€ 0,50\n");
+		expectedReceipt.append("Burger Total = € 5,10\n");
+		expectedReceipt.append("=== Additions ===\n");
+		expectedReceipt.append("=== Total ===\n");
+		expectedReceipt.append("€ 5,10");
+
+		assertEquals(expectedReceipt.toString(), stackedBurger.receipt());
+	}
 	
 	private <E> Set<E> set(E... objects) {
 		return new HashSet<E>(Arrays.asList(objects));

@@ -46,7 +46,19 @@ public class BasicBurgerTest {
 	public void testBasicBurgerReceipt() throws TooManyToppings {
 		Set<Toppings> toppings = set(Toppings.CHEESE, Toppings.KETCHUP, Toppings.ONION, Toppings.TOMATO);
 		BasicBurger stackedBurger = new BasicBurger(BLACK_ANGUS_PATTY, WHOLEGRAIN, toppings);
-		System.out.println(stackedBurger.receipt());
+		StringBuilder expectedReceipt = new StringBuilder();
+		expectedReceipt.append("=== Burger ===\n");
+		expectedReceipt.append("BasicBurger	€ 2,50\n");
+		expectedReceipt.append("+ cheese	€ 1,00\n");
+		expectedReceipt.append("+ ketchup	€ 0,10\n");
+		expectedReceipt.append("+ onion	€ 0,50\n");
+		expectedReceipt.append("+ tomato	€ 0,50\n");
+		expectedReceipt.append("Burger Total = € 4,60\n");
+		expectedReceipt.append("=== Additions ===\n");
+		expectedReceipt.append("=== Total ===\n");
+		expectedReceipt.append("€ 4,60");
+
+		assertEquals(expectedReceipt.toString(), stackedBurger.receipt());
 	}
 	
 	private <E> Set<E> set(E... objects) {

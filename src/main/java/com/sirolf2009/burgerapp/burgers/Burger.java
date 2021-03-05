@@ -1,5 +1,6 @@
 package com.sirolf2009.burgerapp.burgers;
 
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -30,19 +31,23 @@ public abstract class Burger {
 	}
 	
 	public String receipt() {
+		NumberFormat price = NumberFormat.getCurrencyInstance();
 		StringBuilder str = new StringBuilder();
+		
 		str.append("=== Burger ===\n");
-		str.append(this.getClass().asSubclass(this.getClass()).getSimpleName()+"\t"+baseCost+"\n");
-		toppings.forEach(topping -> {
-			str.append("+ "+topping.name().toLowerCase()+"\t"+topping.getCost()+"\n");
+		str.append(this.getClass().asSubclass(this.getClass()).getSimpleName()+"\t"+price.format(baseCost)+"\n");
+		toppings.stream().sorted((a,b) -> a.name().compareTo(b.name())).forEach(topping -> {
+			str.append("+ "+topping.name().toLowerCase()+"\t"+price.format(topping.getCost())+"\n");
 		});
-		str.append("Burger Total = "+(baseCost+getToppingCost())+"\n");
+		str.append("Burger Total = "+price.format(baseCost+getToppingCost())+"\n");
+		
 		str.append("=== Additions ===\n");
-		additions.forEach(addition -> {
-			str.append("+"+addition.name().toLowerCase()+"\t"+addition.getCost()+"\n");
+		additions.stream().sorted((a,b) -> a.name().compareTo(b.name())).forEach(addition -> {
+			str.append("+"+addition.name().toLowerCase()+"\t"+price.format(addition.getCost())+"\n");
 		});
+		
 		str.append("=== Total ===\n");
-		str.append(getCost());
+		str.append(price.format(getCost()));
 		return str.toString();
 	}
 	
