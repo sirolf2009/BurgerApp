@@ -1,6 +1,5 @@
 package com.sirolf2009.burgerapp;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
