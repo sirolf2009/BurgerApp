@@ -37,8 +37,10 @@ public class BasicBurgerTest {
 	
 	@Test
 	public void testBasicBurgerMaxTopping() throws TooManyToppings {
-		Set<Toppings> tooManyToppings = set(Toppings.CHEESE, Toppings.KETCHUP, Toppings.ONION, Toppings.TOMATO, Toppings.LETTUCE, Toppings.MUSTARD);
+		Set<Toppings> justEnoughToppings = set(Toppings.CHEESE, Toppings.KETCHUP, Toppings.ONION, Toppings.TOMATO);
+		new BasicBurger(BLACK_ANGUS_PATTY, WHOLEGRAIN, justEnoughToppings);
 		
+		Set<Toppings> tooManyToppings = set(Toppings.CHEESE, Toppings.KETCHUP, Toppings.ONION, Toppings.TOMATO, Toppings.LETTUCE, Toppings.MUSTARD);
 		assertThrows(TooManyToppings.class, () -> new BasicBurger(BLACK_ANGUS_PATTY, WHOLEGRAIN, tooManyToppings));
 	}
 	
