@@ -78,5 +78,9 @@ public abstract class Burger {
 	public Set<Toppings> getToppings() {
 		return toppings;
 	}
+	
+	public List<Addition> getAdditions() {
+		return additions;
+	}
 
 }
